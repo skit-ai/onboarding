@@ -1,2 +1,3 @@
 # onboarding
-Artifacts from onboarding sessions
+
+Artifacts from onboarding sessions.
