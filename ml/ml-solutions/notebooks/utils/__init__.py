@@ -71,7 +71,7 @@ def test_duckling_entities(test_json, service_url):
             print("failed test case:")
             print("true entity_type:", true_entities[i])
             print("predicted entity_type:", predicted_entities[i])
-            print("description: ", tests[i]["description"])
+            print("description: ", tests[i]["test_description"])
         
     if pass_flag:
         print("All tests passed!")
