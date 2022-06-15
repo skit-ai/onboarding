@@ -11,11 +11,12 @@ def preprocess(df):
     labels = []
     for _, row in tqdm(df.iterrows(), total=len(df)):
         try:
-            label = row["labels"]
-            data = json.loads(row["data"])
+            label = row["tag"]
+            data = json.loads(row["alternatives"])
             texts.append(data)
             labels.append(label)
         except Exception as e:
+            print(e)
             pass
     return texts, labels
 
@@ -24,9 +25,9 @@ def test_slu_model(test_csv, service_url):
     df_test = pd.read_csv(test_csv)
     texts, true_labels = preprocess(df_test)
     predicted_labels = []
-    for i in texts:
+    for i in tqdm(texts):
         req_obj = {}
-        req_obj["alternatives"] = i["alternatives"]
+        req_obj["alternatives"] = i
         req_obj["context"] = {}
         req_obj["context"]["current_state"] = "test_state"
         API_ENDPOINT = service_url
@@ -75,5 +76,4 @@ def test_duckling_entities(test_json, service_url):
         
     if pass_flag:
         print("All tests passed!")
-
-
+ 
